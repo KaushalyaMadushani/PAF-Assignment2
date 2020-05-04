@@ -73,7 +73,7 @@ function onPatientRegisterComplete(response, status){
 	$("#hidPatientIdSave").val("");
 	$("#patientSignUp")[0].reset(); 
 	
-}
+}	
 
 //Update
 $(document).on("click", ".btnUpdate", function(event)
@@ -88,47 +88,9 @@ $(document).on("click", ".btnUpdate", function(event)
 	$("#email").val($(this).closest("tr").find('td:eq(7)').text());
 	$("#phone").val($(this).closest("tr").find('td:eq(8)').text());
 	$("#password").val($(this).closest("tr").find('td:eq(9)').text());
-	$("#cPassword").val($(this).closest("tr").find('td:eq(10)').text());
+	
 	
 });
-
-//Client-Model
-function validateForm(){
-
-	if($("#fName").val().trim() == ""){
-		return "Insert First Name...!";
-	}
-	
-	if($("#lName").val().trim() == ""){
-		return "Insert Last Name...!";
-	}
-	if($("#gender").val() == "0"){
-		return "Select Gender...!";
-	}
-	if($("#NIC").val().trim() == ""){
-		return "Insert NIC...!";
-	}
-	if($("#DOB").val().trim() == ""){
-		return "Insert Date Of Birth...!";
-	}
-	if($("#bloodGroup").val() == "0"){
-		return "Select Blood Group...!";
-	}
-	if($("#email").val().trim() == ""){
-		return "Insert Email...!";
-	}
-	if($("#phone").val().trim() == ""){
-		return "Insert Phone Number...!";
-	}
-	if($("#password").val().trim() == ""){
-		return "Insert Password...!";
-	}
-	if($("#cPassword").val().trim() == ""){
-		return "Insert Confirm Password...!";
-	}
-	
-	return true;
-}
 
 //Delete
 $(document).on("click", ".btnRemove", function(event){
@@ -173,3 +135,42 @@ function onPatientDeleteComplete(response, status){
 		 $("#alertError").show();
 	 } 
 }
+
+//Client-Model
+function validateForm(){
+
+	if($("#fName").val().trim() == ""){
+		return "Insert First Name...!";
+	}
+	
+	if($("#lName").val().trim() == ""){
+		return "Insert Last Name...!";
+	}
+	if($("#gender").val() == "0"){
+		return "Select Gender...!";
+	}
+	if($("#NIC").val().trim() == ""){
+		return "Insert NIC...!";
+	}
+	if($("#DOB").val().trim() == ""){
+		return "Insert Date Of Birth...!";
+	}
+	if($("#bloodGroup").val() == "0"){
+		return "Select Blood Group...!";
+	}
+	if($("#email").val().trim() == ""){
+		return "Insert Email...!";
+	}
+	if($("#phone").val().trim() == ""){
+		return "Insert Phone Number...!";
+	}
+	if($("#password").val().trim() == ""){
+		return "Insert Password...!";
+	}
+	if($("#cPassword").val().trim() == ""){
+		return "Insert Confirm Password...!";
+	}
+	
+	return true;
+}
+
