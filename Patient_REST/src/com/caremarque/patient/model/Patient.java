@@ -127,4 +127,12 @@ public class Patient {
 		this.confirmPassword = confirmPassword;
 	}
 
+	@Override
+	public String toString() {
+		return "Patient [patientId=" + patientId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender="
+				+ gender + ", nic=" + nic + ", dob=" + dob + ", email=" + email + ", phone=" + phone + ", bloodGroup="
+				+ bloodGroup + ", password=" + password + ", confirmPassword=" + confirmPassword + "]";
+	}
+
+	
 }
