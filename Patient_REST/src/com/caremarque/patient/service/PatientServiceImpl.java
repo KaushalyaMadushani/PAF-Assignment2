@@ -35,24 +35,28 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	public String registerPatient(Patient patient) {
 
+		System.out.println("register");
 		String output = "";
 
 		// Here we call the generatePatientIDs method to auto generate a patientId
 		String patientId = CommonUtils.generatePatientIDs(getPatientIDs());
+		System.out.println("PatientId : " +patientId );
 
 		try {
 
 			con = DBConnection.getDBConnection();
 
-			String query = "INSERT INTO patient(patientId, firstName, lastName, gender, NIC, DOB, bloodGroup, email, phone, password) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO patient(patientId, firstName, lastName, gender, NIC, DOB, bloodGroup, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			//String query = "INSERT INTO patient(firstName, lastName, gender, NIC, DOB, bloodGroup, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			preparedStmt = con.prepareStatement(query);
 
 
 				patient.setPatientId(patientId);
 				preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patient.getPatientId());
+				System.out.println("PatientId :" + patient.getPatientId());
 				preparedStmt.setString(Constants.COLUMN_INDEX_TWO, patient.getFirstName());
+				System.out.println("PatientName :" + patient.getFirstName());
 				preparedStmt.setString(Constants.COLUMN_INDEX_THREE, patient.getLastName());
 				preparedStmt.setString(Constants.COLUMN_INDEX_FOUR, patient.getGender());
 				preparedStmt.setString(Constants.COLUMN_INDEX_FIVE, patient.getNIC());
@@ -62,7 +66,8 @@ public class PatientServiceImpl implements IPatientService {
 				preparedStmt.setString(Constants.COLUMN_INDEX_NINE, patient.getPhone());
 				preparedStmt.setString(Constants.COLUMN_INDEX_TEN, patient.getPassword());
 				preparedStmt.executeUpdate();
-
+			
+		
 				String newPatient = getAllPatients();
 
 				//output = "{\"status\" : \"success\", \"data\" : \"Successfully registered\"}";
