@@ -88,7 +88,7 @@ $(document).on("click", ".btnUpdate", function(event)
 	$("#email").val($(this).closest("tr").find('td:eq(7)').text());
 	$("#phone").val($(this).closest("tr").find('td:eq(8)').text());
 	$("#password").val($(this).closest("tr").find('td:eq(9)').text());
-	
+	$("#cPassword").val($(this).closest("tr").find('td:eq(10)').text());
 	
 });
 
