@@ -221,61 +221,63 @@ public class PatientServiceImpl implements IPatientService {
 
 	}
 
-/*	// to update patient details
-	@Override
-	public String updatePatientDetails(Patient patient) {
+	// to update patient details
+		@Override
+		public String updatePatientDetails(String patientId, String fName, String lName, String gender, String nic, String dob, String bloodGroup, String email, String phone, String pwd, String cPwd) {
 
-		String output = "";
-
-		try {
-
-			con = DBConnection.getDBConnection();
-
-			String query = "UPDATE patient SET firstName=?, lastName=?, gender=?, NIC=?, DOB=?, phone=?, bloodGroup=?, allergies=?, password=?, cPassword=?"
-					+ " WHERE patientId=? ";
-			
-
-			preparedStmt = con.prepareStatement(query);
-			
-			preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patient.getFirstName());
-			preparedStmt.setString(Constants.COLUMN_INDEX_TWO, patient.getLastName());
-			preparedStmt.setString(Constants.COLUMN_INDEX_THREE, patient.getGender());
-			preparedStmt.setString(Constants.COLUMN_INDEX_FOUR, patient.getNIC());
-			preparedStmt.setString(Constants.COLUMN_INDEX_FIVE, patient.getDOB());
-			preparedStmt.setString(Constants.COLUMN_INDEX_SIX, patient.getPhone());
-			preparedStmt.setString(Constants.COLUMN_INDEX_SEVEN, patient.getBloodGroup());
-			preparedStmt.setString(Constants.COLUMN_INDEX_EIGHT, patient.getAllergy());
-			preparedStmt.setString(Constants.COLUMN_INDEX_NINE, patient.getPassword());
-			preparedStmt.setString(Constants.COLUMN_INDEX_TEN, patient.getConfirmPassword());
-			preparedStmt.setString(Constants.COLUMN_INDEX_ELEVEN, patient.getPatientId());
-			
-			preparedStmt.execute();
-
-			output = "Patient details updated successfully..!";
-			
-		} catch (Exception e) {
-
-			output = "Error while updating the patient details..!";
-			log.log(Level.SEVERE, e.getMessage());
-
-		} finally {
+			String output = "";
 
 			try {
-				if (preparedStmt != null) {
-					preparedStmt.close();
-				}
 
-				if (con != null) {
-					con.close();
-				}
+				con = DBConnection.getDBConnection();
 
+				String query = "UPDATE patient SET firstName=?, lastName=?, gender=?, NIC=?, DOB=?, bloodGroup=?, email=?, phone=?, password=?, cPassword=?"
+						+ " WHERE patientId=? ";
+				
+
+				preparedStmt = con.prepareStatement(query);
+				
+				preparedStmt.setString(Constants.COLUMN_INDEX_ONE, fName);
+				preparedStmt.setString(Constants.COLUMN_INDEX_TWO, lName);
+				preparedStmt.setString(Constants.COLUMN_INDEX_THREE, gender);
+				preparedStmt.setString(Constants.COLUMN_INDEX_FOUR, nic);
+				preparedStmt.setString(Constants.COLUMN_INDEX_FIVE, dob);
+				preparedStmt.setString(Constants.COLUMN_INDEX_SIX, bloodGroup);
+				preparedStmt.setString(Constants.COLUMN_INDEX_SEVEN, email);
+				preparedStmt.setString(Constants.COLUMN_INDEX_EIGHT, phone);
+				preparedStmt.setString(Constants.COLUMN_INDEX_NINE, pwd);
+				preparedStmt.setString(Constants.COLUMN_INDEX_TEN, cPwd);	
+				preparedStmt.setString(Constants.COLUMN_INDEX_ELEVEN, patientId);	
+				preparedStmt.execute();
+				
+				System.out.println("Update patintId : " + patientId);
+				
+				String newPatient = getAllPatients();
+				 output = "{\"status\":\"success\", \"data\": \"" + newPatient + "\"}"; 
+				
 			} catch (Exception e) {
-				log.log(Level.SEVERE, e.getMessage());
-			}
-		}
 
-		return output;
-	}
+				output = "{\"status\":\"error\", \"data\":\"Error while updating the patient details..!\"}"; 
+				log.log(Level.SEVERE, e.getMessage());
+
+			} finally {
+
+				try {
+					if (preparedStmt != null) {
+						preparedStmt.close();
+					}
+
+					if (con != null) {
+						con.close();
+					}
+
+				} catch (Exception e) {
+					log.log(Level.SEVERE, e.getMessage());
+				}
+			}
+
+			return output;
+		}
 	
 	// to delete a patient from the system
 	@Override
@@ -320,7 +322,7 @@ public class PatientServiceImpl implements IPatientService {
 
 		return output;
 	}
-*/
+
 	
 
 }
