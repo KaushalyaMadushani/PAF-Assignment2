@@ -130,3 +130,46 @@ function validateForm(){
 	return true;
 }
 
+//Delete
+$(document).on("click", ".btnRemove", function(event){
+		
+	$.ajax({
+		url : "PatientAPI",
+		type : "DELETE",
+		data : "patientId=" + $(this).data("patientid"),
+		dataType : "text",
+		complete : function(response, status){
+			 
+			 onPatientDeleteComplete(response.responseText, status);
+		 }
+	});
+}); 
+
+function onPatientDeleteComplete(response, status){
+	
+	if (status == "success")
+	 {
+		var resultSet = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success"){
+			
+			 $("#alertSuccess").text("Successfully deleted..!");
+			 $("#alertSuccess").show();
+			 
+			 $("#divPatientsGrid").html(resultSet.data);
+			 
+		} else if (resultSet.status.trim() == "error"){
+			 $("#alertError").text(resultSet.data);
+			 $("#alertError").show();
+		}
+		
+	 } else if (status == "error")
+	 {
+		 $("#alertError").text("Error while deleting..!");
+		 $("#alertError").show();
+	 } else
+	 {
+		 $("#alertError").text("Unknown error while deleting..!");
+		 $("#alertError").show();
+	 } 
+}
