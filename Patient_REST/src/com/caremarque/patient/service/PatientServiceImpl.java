@@ -279,49 +279,50 @@ public class PatientServiceImpl implements IPatientService {
 			return output;
 		}
 	
-	// to delete a patient from the system
-	@Override
-	public String deletePatient(String patientId) {
+		// to delete a patient from the system
+		@Override
+		public String deletePatient(String patientId) {
 
-		String output = "";
-
-		try {
-
-			con = DBConnection.getDBConnection();
-
-			String query = "DELETE FROM patient WHERE patientId = ?";
-
-			preparedStmt = con.prepareStatement(query);
-
-			preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patientId);
-
-			preparedStmt.execute();
-
-			output = "Delete account successfully..!";
-
-		} catch (Exception e) {
-
-			output = "Error while deleting the patient account..!";
-			log.log(Level.SEVERE, e.getMessage());
-
-		} finally {
+			String output = "";
 
 			try {
-				if (preparedStmt != null) {
-					preparedStmt.close();
-				}
 
-				if (con != null) {
-					con.close();
-				}
+				con = DBConnection.getDBConnection();
+
+				String query = "DELETE FROM patient WHERE patientId = ?";
+
+				preparedStmt = con.prepareStatement(query);
+
+				preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patientId);
+
+				preparedStmt.execute();
+
+				String newPatient = getAllPatients();
+				output = "{\"status\":\"success\", \"data\": \"" + newPatient + "\"}"; 
 
 			} catch (Exception e) {
-				log.log(Level.SEVERE, e.getMessage());
-			}
-		}
 
-		return output;
-	}
+				output = "{\"status\":\"error\", \"data\":\"Error while deleting the patient account..!\"}"; 
+				log.log(Level.SEVERE, e.getMessage());
+
+			} finally {
+
+				try {
+					if (preparedStmt != null) {
+						preparedStmt.close();
+					}
+
+					if (con != null) {
+						con.close();
+					}
+
+				} catch (Exception e) {
+					log.log(Level.SEVERE, e.getMessage());
+				}
+			}
+
+			return output;
+		}
 
 	
 
