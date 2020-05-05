@@ -1,7 +1,6 @@
 //Page refresh moment
 $(document).ready(function(){
 	if($("#alertSuccess").text().trim() == ""){
-		
 		$("#alertSuccess").hide();
 	}
 	$("#alertError").hide();
@@ -138,9 +137,6 @@ function onPatientDeleteComplete(response, status){
 
 //Client-Model
 function validateForm(){
-
-	
-	
 	
 	if($("#fName").val().trim() == ""){
 		return "Insert First Name...!";
