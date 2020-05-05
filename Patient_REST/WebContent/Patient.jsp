@@ -14,10 +14,14 @@
 <!-- CSS -->
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 <link rel="stylesheet" href="Views/Patient.css">
+<link rel="stylesheet" href="Views/bootstrap-datepicker3.css"/>
+
 
 <!-- JS -->
 <script src="Components/jquery-3.2.1.min.js"></script>
 <script src="Components/Patient.js" type="text/javascript"></script>
+<script src="Components/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="Components/popper.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -70,13 +74,10 @@
 			<label>Blood Group<label_1> *</label_1></label><br/>
 				<select name="bloodGroup" id="bloodGroup" class="form-control form-control-sm">
 					<option value="0">Select Blood Group</option>
-					<option value="A+">A+</option>
-					<option value="A-">A-</option>
-					<option value="B+">B+</option>
-					<option value="B-">B-</option>
+					<option value="A">A</option>
+					<option value="B">B</option>
 					<option value="AB">AB</option>
-					<option value="O+">O+</option>
-					<option value="O-">O-</option>
+					<option value="O">O</option>
 				</select><br/>	
 		</div>
 	</div>
@@ -119,15 +120,12 @@
 	<input id = "btnSave" name="btnSave" type = "button" value="Sign Up" class = "btn btn-primary">
 	<input type = "hidden" id = "hidPatientIdSave" name = "hidPatientIdSave" value = "">
 	
-	<br><br>
-	
-	<div id = "alertSuccess" class = "alert alert-success"></div>
-	<div id = "alertError" class = "alert alert-danger"></div>
-	
+	<br>
 			
 </form>
 
-
+	<div id = "alertSuccess" class = "alert alert-success"></div>
+	<div id = "alertError" class = "alert alert-danger"></div>
 
 <div id="divPatientsGrid">
  <%
@@ -137,6 +135,21 @@
 </div>
 
 </div>
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="DOB"]'); 
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        /* format: 'mm/dd/yyyy', */
+        format: 'yyyy/mm/dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
 
 </body>
 </html>
