@@ -80,6 +80,7 @@ public class PatientAPI extends HttpServlet {
 		String output = patientServiceImpl.registerPatient(patient);
 		System.out.println(output);
 		response.getWriter().write(output);
+		System.out.println("response :" + response);
 		
 	}
 

@@ -12,13 +12,7 @@ import com.caremarque.patient.model.Patient;
 import com.caremarque.patient.utils.CommonUtils;
 import com.caremarque.patient.utils.Constants;
 import com.caremarque.patient.utils.DBConnection;
-//import com.google.gson.Gson;
-//import com.google.gson.JsonElement;
-//import com.google.gson.JsonParser;
-//import com.google.gson.reflect.TypeToken;
-//import com.sun.jersey.api.client.Client;
-//import com.sun.jersey.api.client.ClientResponse;
-//import com.sun.jersey.api.client.WebResource;
+
 
 
 public class PatientServiceImpl implements IPatientService {
@@ -47,7 +41,6 @@ public class PatientServiceImpl implements IPatientService {
 			con = DBConnection.getDBConnection();
 
 			String query = "INSERT INTO patient(patientId, firstName, lastName, gender, NIC, DOB, bloodGroup, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			//String query = "INSERT INTO patient(firstName, lastName, gender, NIC, DOB, bloodGroup, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			preparedStmt = con.prepareStatement(query);
 
@@ -70,7 +63,6 @@ public class PatientServiceImpl implements IPatientService {
 		
 				String newPatient = getAllPatients();
 
-				//output = "{\"status\" : \"success\", \"data\" : \"Successfully registered\"}";
 				output = "{\"status\":\"success\", \"data\": \"" + newPatient + "\"}";
 			
 
@@ -148,14 +140,13 @@ public class PatientServiceImpl implements IPatientService {
 		try {
 			con = DBConnection.getDBConnection();
 
-//			String query = "SELECT patientId, firstName, lastName, gender, NIC, DOB, email, phone, bloodGroup, password  FROM patient";
 			String query = "SELECT * FROM patient";
 
 			st = con.createStatement();
 			rs = st.executeQuery(query);
 
-			output = "<table class = \"table table-striped table-responsive\" style=\"width:120%; margin-left: -40px\">" +
-					 "<tr style=\"background-color:#000099; color:#ffffff;\"><th>Patient Id</th>" + "<th>First Name</th>" + "<th>Last Name</th>" +
+			output = "<table class = 'table table-striped table-responsive' style='width:120%; margin-left: -40px'>" +
+					 "<tr style='background-color:#000099; color:#ffffff;'><th>Patient Id</th>" + "<th>First Name</th>" + "<th>Last Name</th>" +
 					 "<th>Gender</th>" + "<th>NIC</th>" + "<th>DOB</th>" + "<th>Blood Group</th>" +
 					 "<th>Email</th>" + "<th>Phone</th>" + "<th>Password</th>" + "<th>Update</th>" + "<th>Remove</th></tr>";
 
@@ -174,7 +165,7 @@ public class PatientServiceImpl implements IPatientService {
 				
 				System.out.println("GetAllAPtient : PatientId : " + patientId);
 
-				output += "<tr><td><input id = \"hidPatientIdUpdate\" name = \"hidPatientIdUpdate\" type=\"hidden\" value = '" + patientId + "'>" + patientId + "</td>";
+				output += "<tr><td><input id = 'hidPatientIdUpdate' name = 'hidPatientIdUpdate' type='hidden' value = '" + patientId + "'>" + patientId + "</td>";
 				output += "<td>" + firstName + "</td>";
 				output += "<td>" + lastName + "</td>";
 				output += "<td>" + gender + "</td>";
@@ -184,9 +175,10 @@ public class PatientServiceImpl implements IPatientService {
 				output += "<td>" + email + "</td>";
 				output += "<td>" + phone + "</td>";
 				output += "<td>" + password + "</td>";
-				output += "<td><input name = \"btnUpdate\" type = \"button\" value = \"Update\" class = \"btnUpdate btn btn-success btn-sm\"></td>"
+				output += "<td><input name = 'btnUpdate' type = 'button' value = 'Update' class = 'btnUpdate btn btn-success btn-sm'></td>"
 						+ "<td><input name = 'btnRemove' type = 'button' value = 'Remove' class = 'btnRemove btn btn-danger btn-sm' data-patientid = '"+ patientId +"'>" 
 						+ "</td></tr>";
+				
 				System.out.println("Data retrived from the database");
 
 			}
